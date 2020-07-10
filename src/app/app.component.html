@@ -2,7 +2,7 @@ AppComponent
 <br />
 <!-- *ngIf is Structure Directive : chi thi ket cau -->
 
-<app-hello *ngIf="user.age >= 18; else under18" [name]="user.name"></app-hello>
+<app-hello *ngIf="me.age >= 18; else under18" [name]="me.name"></app-hello>
 <!-- <ng-template [ngIf]="user.age >=18" [ngIfElse]="under18" >
 
 </ng-template> -->
@@ -14,17 +14,17 @@ AppComponent
 </ng-template>
 
 <br />
-<button (click)="user.age = user.age - 1">-</button>
-Age: {{user.age}}
-<button (click)="user.age = user.age + 1 ">+</button>
+<button (click)="me.age = me.age - 1">-</button>
+Age: {{me.age}}
+<button (click)="me.age = me.age + 1 ">+</button>
 <br />
 {{name}}
 <!--{{expression}} String Interpolation;sẽ gọi toString() để show. -->
 <!-- Data Binding -->
-<p>{{user.name}}</p>
-<p>{{user.age}}</p>
+<p>{{me.name}}</p>
+<p>{{me.age}}</p>
 
-<input [type]="inputType" [value]="user.name">
+<input [type]="inputType" [value]="me.name">
 <!-- Event Binding -->
 <button type="button" (click)="handler($event)">Click me !</button>
 
@@ -32,3 +32,64 @@ Age: {{user.age}}
 <input type="text" [ngModel]="name" (ngModelChange)="name = $event" />
 <!-- 2 Way Data Binding -->
 <input type="text" [(ngModel)]="name" />
+<!--
+  if(user.length > 0){
+    for(user){
+
+    }
+  } 
+
+
+  -$implicit : item Implicit Context variable
+  -index: so thu tu cua item hien tai
+  -count: do dai cua array
+  -first: true neu item do la item dau tien cua array
+  -last: true neu item do la item cuoi cung cua array
+  -event: true neu item do o vi tri chan
+  -old: true neu item do o vi tri le
+ -->
+<ul>
+  <ng-container *ngIf="user.length > 0; else noUser">
+    <li *ngFor="let user of user; index as idx; count as total; 
+  first as isFirst; last as isLast; even as isEven; old as isOld">
+      <span>{{user.name}} - {{user.id}} - {{user.phone}}</span>
+      <br>
+      <span>at index {{idx}} out of {{total}}</span>
+      <br>
+      <span *ngIf="isEven"> I am even number</span>
+      <br>
+      <span *ngIf="isOld"> I am old number</span>
+      <br>
+      <span *ngIf="isFirst"> I am first</span>
+      <br>
+      <span *ngIf="isLast"> I am last</span>
+      <br>
+    </li>
+  </ng-container>
+  <ng-template #noUser>
+    No user !
+  </ng-template>
+</ul>
+
+<!-- <ul>
+  <ng-template ngFor [ngForOf]="user" let-user let-idx="index" let-total="count" let-isEven="even" let-isOld="old"
+    let-isFirst="first" let-isLast="last">
+    <li>
+      <span>{{user.name}} - {{user.id}} - {{user.phone}}</span>
+      <br>
+      <span>at index {{idx}} out of {{total}}</span>
+      <br>
+      <span *ngIf="isEven"> I am even number</span>
+      <br>
+      <span *ngIf="isOld"> I am old number</span>
+      <br>
+      <span *ngIf="isFirst"> I am first</span>
+      <br>
+      <span *ngIf="isLast"> I am last</span>
+      <br>
+    </li>
+  </ng-template>
+</ul> -->
+<button *ngFor="let tag of tags; last as isLast" (click)="handler(tag)" [class.right-margin]="!isLast">
+  {{tag}}
+</button>
