@@ -11,12 +11,17 @@ export class AppComponent {
 
   inputType = 'text';
 
+  isDanger = false;
+  isWarning = false;
+
+  classes ="box red-border yellow-background";
+
   me = {
     name : 'Huy Tran',
     age: 22
   }
   users=[]
-  user = [
+  user   = [
     {
       "id": 1,
       "name": "Leanne Graham",

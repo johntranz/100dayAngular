@@ -93,3 +93,41 @@ Age: {{me.age}}
 <button *ngFor="let tag of tags; last as isLast" (click)="handler(tag)" [class.right-margin]="!isLast">
   {{tag}}
 </button>
+
+<br><br>
+<button (click)="isDanger = !isDanger">Toggle Danger</button>
+<br><br>
+<button (click)="isWarning = !isWarning">Toggle Warning</button>
+
+<!-- 
+  - [class.ten-class]
+  vd: [class.red-border]=isDanger
+  - [class]="array"
+  vd: [class]="['red-border', 'yellow-background']"
+  
+  - [class]="object"
+  vd: [class]="{'red-border': isDanger, 'yellow-background': isWarning}"
+  
+  - [class]="variable"
+  vd: [class]="classes", with classes="box red-border yellow-background"
+-->
+<!-- <div class="box" [class.red-border]="isDanger" [class.yellow-background]="isWarning"> </div> -->
+<div class="box" [class]="{'red-border': isDanger, 'yellow-background': isWarning}"></div>
+
+<!-- 
+  - [style.tenStyle]
+  - [style.ten-style]
+  - [style.tenStyle.unit]
+  - [style]='object'
+  vd: [style]="{color: 'red', background: 'yellow', fontSize: '20px'}"
+
+  - [style.css-variable]
+ -->
+<p [style.color]="'red'" [style.backgroundColor]="'yellow'" 
+[style.fontSize.em]="2">
+  Start editing to see some magic happen !
+</p>
+
+<p [style.--text-color]="isDanger ? 'red' : 'blue'" [style]="{color:'var(--text-color)', background:'yellow', fontSize:'20px'}">
+  Start editing to see some magic happen 2 !
+</p>
